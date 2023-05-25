@@ -188,7 +188,7 @@ const HomeScreen = () => {
                                 ...styles.inputBox,
                                 ...styles.inputSearch
                             }}
-                            onPress={() => {}}>
+                            onPress={() => { }}>
                             <Text style={styles.searchButtonText}>Search</Text>
                         </TouchableOpacity>
                     </View>
@@ -199,7 +199,7 @@ const HomeScreen = () => {
                 modalVisible={modalVisible}
                 controlDispatcher={dispatchers}
                 setModalVisible={setModalVisible}
-                {...state}/>
+                {...state} />
         </>
     )
 }
