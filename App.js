@@ -16,12 +16,14 @@ import {
   View,
 } from 'react-native';
 import StackNavigator from './StackNavigator';
+import { ModalPortal } from 'react-native-modals';
 
 function App() {
   
   return (
     <>
       <StackNavigator/>
+      <ModalPortal />
     </>
   );
 }

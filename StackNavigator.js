@@ -25,9 +25,9 @@ const StackNavigator = () => {
                     component={HomeScreen}
                     options={{
                         tabBarLabel: "Home",
-                        headerShown: false,
+                        headerShown: true,
                         tabBarIcon: ({focused}) => focused ? (
-                            <Ionicons name="home" size={24} color="black" />
+                            <Ionicons name="home" size={24} color="#003580" />
                         ) : (
                             <Ionicons name="home-outline" size={24} color="black" />
                         )
@@ -39,7 +39,7 @@ const StackNavigator = () => {
                         tabBarLabel: "Saved",
                         headerShown: false,
                         tabBarIcon: ({focused}) => focused ? (
-                            <Ionicons name="heart" size={24} color="black" />
+                            <Ionicons name="heart" size={24} color="#003580" />
                         ) : (
                             <Ionicons name="ios-heart-outline" size={24} color="black" />
                         )
@@ -51,7 +51,7 @@ const StackNavigator = () => {
                         tabBarLabel: "Bookings",
                         headerShown: false,
                         tabBarIcon: ({focused}) => focused ? (
-                            <Ionicons name="notifications" size={24} color="black" />
+                            <Ionicons name="notifications" size={24} color="#003580" />
                         ) : (
                             <Ionicons name="notifications-outline" size={24} color="black" />
                         )
@@ -63,7 +63,7 @@ const StackNavigator = () => {
                         tabBarLabel: "Profile",
                         headerShown: false,
                         tabBarIcon: ({focused}) => focused ? (
-                            <Ionicons name="person" size={24} color="black" />
+                            <Ionicons name="person" size={24} color="#003580" />
                         ) : (
                             <Ionicons name="person-outline" size={24} color="black" />
                         )
@@ -74,7 +74,7 @@ const StackNavigator = () => {
   return (
     <NavigationContainer>
         <Stack.Navigator>
-            <Stack.Screen name='Main' component={BottomTabs} />
+            <Stack.Screen name='Main' component={BottomTabs} options={{headerShown: false}} />
         </Stack.Navigator>
     </NavigationContainer>
   )
