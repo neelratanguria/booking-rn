@@ -1,0 +1,17 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Entypo.otf",
+      "sha1": "f54f4fc9d7e1475039990418b33356db5fddb097"
+    },
+    {
+      "path": "assets/fonts/anticon.ttf",
+      "sha1": "4a801bdf0ea5791e9f4673b2adac4b14185c00c3"
+    },
+    {
+      "path": "assets/fonts/ionicons.ttf",
+      "sha1": "0f178b4b286fe6dcbb453d725a81628c472f268d"
+    }
+  ]
+}

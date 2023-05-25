@@ -15,14 +15,14 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import StackNavigator from './StackNavigator';
 
 function App() {
   
   return (
-    <View style={styles.sectionContainer}>
-      <StatusBar />
-      
-    </View>
+    <>
+      <StackNavigator/>
+    </>
   );
 }
 
