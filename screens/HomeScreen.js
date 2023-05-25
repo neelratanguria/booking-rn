@@ -6,22 +6,100 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import GLOBALS from '../assets/globals';
 import Header from '../components/header';
-import {
-    BottomModal,
-    ModalFooter,
-    ModalButton,
-    ModalTitle,
-    SlideAnimation,
-    ModalContent
-} from 'react-native-modals'
+import BookingModal from '../components/BookingModal';
+
+const actionTypes = {
+    increaseRoom: "increaseRoom",
+    decreaseRoom: "decreaseRoom",
+    increaseAdult: "increaseAdult",
+    decreaseAdult: "decreaseAdult",
+    increaseChildren: "increaseChildren",
+    decreaseChildren: "decreaseChildren"
+}
+
+const controlsReducer = (state, action) => {
+    console.log(action)
+    switch (action.type) {
+        case actionTypes.increaseRoom: {
+            console.log('increasing')
+            return {
+                ...state,
+                countRoom: state.countRoom + 1
+            }
+        }
+        case actionTypes.decreaseRoom: {
+            console.log('decreasing')
+            return {
+                ...state,
+                countRoom: state.countRoom - 1
+            }
+        }
+        case actionTypes.increaseAdult: {
+            return {
+                ...state,
+                countAdult: state.countAdult + 1
+            }
+        }
+        case actionTypes.decreaseAdult: {
+            return {
+                ...state,
+                countAdult: state.countAdult - 1
+            }
+        }
+        case actionTypes.increaseChildren: {
+            return {
+                ...state,
+                countChildren: state.countChildren + 1
+            }
+        }
+        case actionTypes.decreaseChildren: {
+            return {
+                ...state,
+                countChildren: state.countChildren - 1
+            }
+        }
+        default: {
+            throw new Error()
+        }
+    }
+}
+
+const useControls = (reducer) => {
+    const [state, dispatch] = React.useReducer(reducer, {
+        countRoom: 1,
+        countAdult: 2,
+        countChildren: 0
+    })
+
+    const increaseRoom = () => dispatch({ type: actionTypes.increaseRoom })
+    const decreaseRoom = () => dispatch({ type: actionTypes.decreaseRoom })
+
+    const increaseAdult = () => dispatch({ type: actionTypes.increaseAdult })
+    const decreaseAdult = () => dispatch({ type: actionTypes.decreaseAdult })
+
+    const increaseChildren = () => dispatch({ type: actionTypes.increaseChildren })
+    const decreaseChildren = () => dispatch({ type: actionTypes.decreaseChildren })
+
+    const dispatchers = {
+        increaseRoom: increaseRoom,
+        decreaseRoom: decreaseRoom,
+        increaseAdult: increaseAdult,
+        decreaseAdult: decreaseAdult,
+        increaseChildren: increaseChildren,
+        decreaseChildren: decreaseChildren
+    }
+
+    return {
+        state,
+        dispatchers
+    }
+}
 
 const HomeScreen = () => {
     const navigation = useNavigation()
     const [selectedDates, setSelectedDates] = useState(null)
-    const [rooms, setRooms] = useState(1)
-    const [adults, setAdults] = useState(2)
-    const [children, setChildren] = useState(0)
     const [modalVisible, setModalVisible] = useState(false)
+    const { state, dispatchers } = useControls(controlsReducer)
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -97,118 +175,31 @@ const HomeScreen = () => {
                             onPress={() => setModalVisible(!modalVisible)}>
                             <Ionicons name="person-outline" size={24} color="gray" />
                             <TextInput
-                                placeholder={`${rooms} room • ${adults} adults • ${children} Children`}
+                                editable={false}
+                                selectTextOnFocus={false}
+                                focusable={false}
+                                placeholder={`${state.countRoom} room • ${state.countAdult} adults • ${state.countChildren} Children`}
                                 placeholderTextColor={"red"} />
                         </TouchableOpacity>
 
                         {/* Search Button */}
-                        <TouchableOpacity style={{
-                            ...styles.inputBox,
-                            ...styles.inputSearch
-                        }}>
+                        <TouchableOpacity
+                            style={{
+                                ...styles.inputBox,
+                                ...styles.inputSearch
+                            }}
+                            onPress={() => {}}>
                             <Text style={styles.searchButtonText}>Search</Text>
                         </TouchableOpacity>
-
                     </View>
+                    <Text>Travel more and spend less</Text>
                 </ScrollView>
             </View>
-            <BottomModal
-                swipeThreshold={200}
-                onBackdropPress={() => setModalVisible(!modalVisible)}
-                swipeDirection={['up', 'down']}
-                footer={
-                    <ModalFooter>
-                        <ModalButton
-                            text="Apply"
-                            style={styles.modalApplyButton}
-                            onPress={() => setModalVisible(!modalVisible) }/>
-                    </ModalFooter>
-                }
-                modalTitle={
-                    <ModalTitle title="Select rooms and guests"/>
-                }
-                modalAnimation={new SlideAnimation({
-                    slideFrom: "bottom"
-                })}
-                onHardwareBackPress={() => setModalVisible(!modalVisible)}
-                visible={modalVisible}
-                onTouchOutside={() => setModalVisible(!modalVisible)}>
-                    <ModalContent style={styles.modalContent}>
-                        <View style={styles.modalContentView}>
-                            <Text>Rooms</Text>
-                            <Pressable style={styles.modalControls}>
-                                <TouchableOpacity
-                                    style={styles.modalControl}
-                                    onPress={() => {
-                                        if(rooms > 1) {
-                                            setRooms(rooms-1)
-                                        }
-                                    }}>
-                                    <Text>-</Text>
-                                </TouchableOpacity>
-                                <Pressable>
-                                    <Text>{rooms}</Text>
-                                </Pressable>
-                                <TouchableOpacity
-                                    style={styles.modalControl}
-                                    onPress={() => {
-                                        setRooms(rooms+1)
-                                    }}>
-                                    <Text>+</Text>
-                                </TouchableOpacity>
-                            </Pressable>
-                        </View>
-                        <View style={styles.modalContentView}>
-                            <Text>Adults</Text>
-                            <Pressable style={styles.modalControls}>
-                                <TouchableOpacity
-                                    style={styles.modalControl}
-                                    onPress={() => {
-                                        if(adults > 1) {
-                                            setAdults(adults-1)
-                                        }
-                                    }}>
-                                    <Text>-</Text>
-                                </TouchableOpacity>
-                                <Pressable>
-                                    <Text>{adults}</Text>
-                                </Pressable>
-                                <TouchableOpacity
-                                    style={styles.modalControl}
-                                    onPress={() => {
-                                        setAdults(adults+1)
-                                    }}>
-                                    <Text>+</Text>
-                                </TouchableOpacity>
-                            </Pressable>
-                        </View>
-                        <View style={styles.modalContentView}>
-                            <Text>Children</Text>
-                            <Pressable style={styles.modalControls}>
-                                <TouchableOpacity
-                                    style={styles.modalControl}
-                                    onPress={() => {
-                                        if(children > 0) {
-                                            setChildren(children-1)
-                                        }
-                                    }}>
-                                    <Text>-</Text>
-                                </TouchableOpacity>
-                                <Pressable>
-                                    <Text>{children}</Text>
-                                </Pressable>
-                                <TouchableOpacity
-                                style={styles.modalControl}
-                                onPress={() => {
-                                    setChildren(children+1)
-                                }}>
-                                    <Text>+</Text>
-                                </TouchableOpacity>
-                            </Pressable>
-                        </View>
-                    </ModalContent>
-
-            </BottomModal>
+            <BookingModal
+                modalVisible={modalVisible}
+                controlDispatcher={dispatchers}
+                setModalVisible={setModalVisible}
+                {...state}/>
         </>
     )
 }
@@ -266,35 +257,5 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: "500",
         color: "white"
-    },
-    modalApplyButton: {
-        margin: 20,
-        color: "white",
-        backgroundColor: GLOBALS.COLOR.PRIMARY_BLUE
-    },
-    modalContent: {
-        width: "100%",
-        height: 310
-    },
-    modalContentView: {
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexDirection: 'row',
-        margin: 10,
-        marginVertical: 15
-    },
-    modalControls: {
-        flexDirection: 'row',
-        gap: 10,
-        alignItems: 'center'
-    },
-    modalControl: {
-        width: 26,
-        height: 26,
-        borderRadius: 13,
-        borderColor: GLOBALS.COLOR.GRAY,
-        backgroundColor: GLOBALS.COLOR.GRAY_100,
-        alignItems: 'center',
-        justifyContent: 'center'
     }
 })
