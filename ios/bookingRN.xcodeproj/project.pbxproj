@@ -19,6 +19,7 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		8F64BDB19AC04ADAA5F0E640 /* anticon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73993D9B8DC349A2A06BC755 /* anticon.ttf */; };
 		984A53B5F0274C8A91043A44 /* MaterialIcons-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E85B3749F4F73A6B08FC2 /* MaterialIcons-Regular.ttf */; };
+		2D91EFED55794BA5975930CC /* Material-Design-Iconic-Font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1A6296595C4C47458E857851 /* Material-Design-Iconic-Font.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		89C6BE57DB24E9ADA2F236DE /* Pods-bookingRN-bookingRNTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bookingRN-bookingRNTests.release.xcconfig"; path = "Target Support Files/Pods-bookingRN-bookingRNTests/Pods-bookingRN-bookingRNTests.release.xcconfig"; sourceTree = "<group>"; };
 		E81DF70C7A7645F6AD2E49BC /* ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = ionicons.ttf; path = ../assets/fonts/ionicons.ttf; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		1A6296595C4C47458E857851 /* Material-Design-Iconic-Font.ttf */ = {isa = PBXFileReference; name = "Material-Design-Iconic-Font.ttf"; path = "../assets/fonts/Material-Design-Iconic-Font.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 				E81DF70C7A7645F6AD2E49BC /* ionicons.ttf */,
 				24E342E9683642FC902E2DD9 /* Simple-Line-Icons.ttf */,
 				7F3E85B3749F4F73A6B08FC2 /* MaterialIcons-Regular.ttf */,
+				1A6296595C4C47458E857851 /* Material-Design-Iconic-Font.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 				62B4190FBE564A51AC233E70 /* ionicons.ttf in Resources */,
 				1337032EAF694ADCABB6BF0D /* Simple-Line-Icons.ttf in Resources */,
 				984A53B5F0274C8A91043A44 /* MaterialIcons-Regular.ttf in Resources */,
+				2D91EFED55794BA5975930CC /* Material-Design-Iconic-Font.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
