@@ -40,22 +40,22 @@ const PropertyCard = ({
               <Text style={styles.geniusLevelText}>Genius Level</Text>
             </View>
           </View>
-          
+
           <Text style={styles.address}>
             {property.address.length > 50
               ? property.address.substr(0, 50)
               : property.address}
           </Text>
-          
+
           <Text style={styles.priceForText}>
             Price for 1 Night and {adults} {adults > 1 ? 'adults' : 'adult'}
           </Text>
-          
+
           <View style={styles.priceContainer}>
             <Text style={styles.oldPrice}>{property.oldPrice * adults}</Text>
             <Text style={styles.newPrice}>Rs {property.newPrice * adults}</Text>
           </View>
-          
+
           <View style={styles.roomsContainer}>
             <Text style={styles.room}>Deluxe Room</Text>
             <Text style={styles.room}>Hotel Room: 1 bed</Text>
@@ -64,7 +64,6 @@ const PropertyCard = ({
           <View style={styles.dealContainer}>
             <Text style={styles.deal}>Limited Time deal</Text>
           </View>
-
         </View>
       </Pressable>
     </View>
@@ -155,11 +154,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 3,
     paddingVertical: 2,
-    marginTop: 2
+    marginTop: 2,
   },
-  deal : {
+  deal: {
     textAlign: 'center',
     color: 'white',
-    fontSize: 15
-  }
+    fontSize: 15,
+  },
 });
