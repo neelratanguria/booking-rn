@@ -1,6 +1,16 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useLayoutEffect, useState } from 'react';
-import { Button, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import {
+    Button,
+    Pressable,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
+    Image
+ } from 'react-native';
 import DatePicker from 'react-native-date-ranges';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -192,7 +202,62 @@ const HomeScreen = () => {
                             <Text style={styles.searchButtonText}>Search</Text>
                         </TouchableOpacity>
                     </View>
-                    <Text>Travel more and spend less</Text>
+                    <Text
+                        style={styles.travelMoreText}>
+                        Travel more and spend less
+                    </Text>
+                    <ScrollView
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}>
+                        <Pressable style={styles.pressableCard}>
+                            <Text style={styles.cardTitle}>Genius</Text>
+                            <Text style={styles.cardDescription}>You are at Genius level 1 in our loyalty program</Text>
+                        </Pressable>
+                        <Pressable style={{
+                            ...styles.pressableCard,
+                            borderColor: GLOBALS.COLOR.GRAY_100,
+                            backgroundColor: 'transparent',
+                            borderWidth: 2
+                        }}>
+                            <Text style={{
+                                ...styles.cardTitle,
+                                color: 'black'
+                            }}>10% Discounts</Text>
+                            <Text style={{
+                                ...styles.cardDescription,
+                                color: 'black'
+                            }}>Enjoy discount at participating at properties worldwide.</Text>
+                        </Pressable>
+                        <Pressable style={{
+                            ...styles.pressableCard,
+                            borderColor: GLOBALS.COLOR.GRAY_100,
+                            backgroundColor: 'transparent',
+                            borderWidth: 2
+                        }}>
+                            <Text style={{
+                                ...styles.cardTitle,
+                                color: 'black'
+                            }}>15% Discounts</Text>
+                            <Text style={{
+                                ...styles.cardDescription,
+                                color: 'black'
+                            }}>Complete 5 stays to unlock level 2</Text>
+                        </Pressable>
+                    </ScrollView>
+                    <Pressable
+                        style={{
+                            marginTop: 40,
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}
+                    >
+                        <Image
+                            style={{ width: 200, height: 50, resizeMode: "cover" }}
+                            source={{
+                                uri: "https://assets.stickpng.com/thumbs/5a32a821cb9a85480a628f8f.png",
+                            }}
+                        />
+                    </Pressable>
                 </ScrollView>
             </View>
             <BookingModal
@@ -257,5 +322,30 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: "500",
         color: "white"
+    },
+    travelMoreText: {
+        marginHorizontal: 20,
+        fontSize: 17,
+        fontWeight: "500"
+    },
+    pressableCard: {
+        width: 200,
+        height: 150,
+        marginTop: 10,
+        backgroundColor: GLOBALS.COLOR.PRIMARY_BLUE,
+        borderRadius: 10,
+        padding: 20,
+        marginHorizontal: 20
+    },
+    cardTitle: {
+        color: 'white',
+        fontSize: 15,
+        fontWeight: "bold",
+        marginVertical: 7
+    },
+    cardDescription: {
+        color: 'white',
+        fontSize: 15,
+        fontWeight: "500"
     }
 })
