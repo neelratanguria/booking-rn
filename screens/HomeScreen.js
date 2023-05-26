@@ -15,7 +15,7 @@ import DatePicker from 'react-native-date-ranges';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import GLOBALS from '../assets/globals';
-import Header from '../components/header';
+import Header from '../components/Header';
 import BookingModal from '../components/BookingModal';
 
 const actionTypes = {
@@ -154,7 +154,9 @@ const HomeScreen = () => {
                 <ScrollView>
                     <View style={styles.searchContainer}>
                         {/* Destination */}
-                        <TouchableOpacity style={styles.inputBox}>
+                        <TouchableOpacity
+                            style={styles.inputBox}
+                            onPress={() => navigation.navigate("Search")}>
                             <Ionicons name="search-outline" size={24} color="gray" />
                             <TextInput
                                 placeholder='Enter your Destination'

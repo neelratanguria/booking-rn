@@ -11,6 +11,7 @@ import BookingScreen from './screens/BookingScreen'
 
 import ProfileScreen from './screens/ProfileScreen'
 import { NavigationContainer } from '@react-navigation/native'
+import SearchScreen from './screens/SearchScreen'
 
 
 const StackNavigator = () => {
@@ -18,7 +19,7 @@ const StackNavigator = () => {
     const Stack = createNativeStackNavigator()
 
     function BottomTabs() {
-        return(
+        return (
             <Tab.Navigator>
                 <Tab.Screen
                     name='Home'
@@ -26,58 +27,59 @@ const StackNavigator = () => {
                     options={{
                         tabBarLabel: "Home",
                         headerShown: true,
-                        tabBarIcon: ({focused}) => focused ? (
+                        tabBarIcon: ({ focused }) => focused ? (
                             <Ionicons name="home" size={24} color="#003580" />
                         ) : (
                             <Ionicons name="home-outline" size={24} color="black" />
                         )
-                    }}/>
+                    }} />
                 <Tab.Screen
                     name='Saved'
                     component={SavedScreen}
                     options={{
                         tabBarLabel: "Saved",
                         headerShown: false,
-                        tabBarIcon: ({focused}) => focused ? (
+                        tabBarIcon: ({ focused }) => focused ? (
                             <Ionicons name="heart" size={24} color="#003580" />
                         ) : (
                             <Ionicons name="ios-heart-outline" size={24} color="black" />
                         )
-                    }}/>
+                    }} />
                 <Tab.Screen
                     name='Bookings'
                     component={BookingScreen}
                     options={{
                         tabBarLabel: "Bookings",
                         headerShown: false,
-                        tabBarIcon: ({focused}) => focused ? (
+                        tabBarIcon: ({ focused }) => focused ? (
                             <Ionicons name="notifications" size={24} color="#003580" />
                         ) : (
                             <Ionicons name="notifications-outline" size={24} color="black" />
                         )
-                    }}/>
+                    }} />
                 <Tab.Screen
                     name='Profile'
                     component={ProfileScreen}
                     options={{
                         tabBarLabel: "Profile",
                         headerShown: false,
-                        tabBarIcon: ({focused}) => focused ? (
+                        tabBarIcon: ({ focused }) => focused ? (
                             <Ionicons name="person" size={24} color="#003580" />
                         ) : (
                             <Ionicons name="person-outline" size={24} color="black" />
                         )
-                    }}/>
+                    }} />
             </Tab.Navigator>
         )
     }
-  return (
-    <NavigationContainer>
-        <Stack.Navigator>
-            <Stack.Screen name='Main' component={BottomTabs} options={{headerShown: false}} />
-        </Stack.Navigator>
-    </NavigationContainer>
-  )
+    return (
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen name='Main' component={BottomTabs} options={{ headerShown: false }} />
+                <Stack.Screen name='Search' component={SearchScreen} options={{ headerShow: false }} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    )
 }
 
 export default StackNavigator
