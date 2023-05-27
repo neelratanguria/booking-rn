@@ -13,8 +13,8 @@ import globals from '../assets/globals';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const SortFilterModal = ({
-  modalState,
-  modalDispatchers,
+  controlsState,
+  controlsDispatchers,
   applyFilter,
 }) => {
   const filters = [
@@ -32,13 +32,13 @@ const SortFilterModal = ({
     <>
       <BottomModal
         swipeThreshold={200}
-        onBackdropPress={() => modalDispatchers.toggleModal()}
+        onBackdropPress={() => controlsDispatchers.toggleModal()}
         swipeDirection={['up', 'down']}
         footer={
           <ModalFooter>
             <Pressable
               style={styles.footer}
-              onPress={() => applyFilter(modalState.selectedFilter)}>
+              onPress={() => applyFilter(controlsState.selectedFilter)}>
               <Text>Apply</Text>
             </Pressable>
           </ModalFooter>
@@ -49,9 +49,9 @@ const SortFilterModal = ({
             slideFrom: 'bottom',
           })
         }
-        onHardwareBackPress={() => modalDispatchers.toggleModal()}
-        onTouchOutside={() => modalDispatchers.toggleModal()}
-        visible={modalState.modalVisible}>
+        onHardwareBackPress={() => controlsDispatchers.toggleModal()}
+        onTouchOutside={() => controlsDispatchers.toggleModal()}
+        visible={controlsState.modalVisible}>
         <ModalContent styles={styles.content}>
           <View style={styles.container}>
             <View style={styles.controlType}>
@@ -63,8 +63,8 @@ const SortFilterModal = ({
                 <Pressable
                   key={index}
                   style={styles.option}
-                  onPress={() => modalDispatchers.setFilter(item.filter)}>
-                  {item.filter.includes(modalState.selectedFilter) ? (
+                  onPress={() => controlsDispatchers.setFilter(item.filter)}>
+                  {item.filter.includes(controlsState.selectedFilter) ? (
                     <MaterialIcons
                       name="check-circle"
                       size={18}
@@ -94,7 +94,7 @@ export default SortFilterModal;
 const styles = StyleSheet.create({
   footer: {
     width: "100%",
-    paddingVertical: 20,
+    paddingVertical: 15,
     marginLeft: 'auto',
     marginRight: 'auto',
     marginVertical: 5,

@@ -11,9 +11,10 @@ import SortFilterModal from '../components/SortModal';
 const actionTypes = {
   toggleModal: 'toggleModal',
   setFilter: 'setFilter',
+  navigateToMap: 'navigateToMap',
 };
 
-const modalControlsReducer = (state, action) => {
+const controlsReducer = (state, action) => {
   switch (action.type) {
     case actionTypes.toggleModal: {
       return {
@@ -33,9 +34,9 @@ const modalControlsReducer = (state, action) => {
   }
 };
 
-const useModalControls = reducer => {
-  const [modalState, dispatch] = React.useReducer(reducer, {
-    modalVisible: true,
+const useControls = reducer => {
+  const [controlsState, dispatch] = React.useReducer(reducer, {
+    modalVisible: false,
     selectedFilter: null,
   });
 
@@ -43,15 +44,18 @@ const useModalControls = reducer => {
     dispatch({type: actionTypes.toggleModal, payload: null});
   const setFilter = filter =>
     dispatch({type: actionTypes.setFilter, payload: filter});
+  const navigateToMap = () =>
+    dispatch({type: actionTypes.navigateToMap, payload: null});
 
-  const modalDispatchers = {
+  const controlsDispatchers = {
     toggleModal,
     setFilter,
+    navigateToMap,
   };
 
   return {
-    modalState,
-    modalDispatchers,
+    controlsState,
+    controlsDispatchers,
   };
 };
 
@@ -60,8 +64,6 @@ const PlacesScreen = () => {
   const navigation = useNavigation();
 
   const [sortedData, setSortedData] = useState(propertiesData);
-
-  const {modalState, modalDispatchers} = useModalControls(modalControlsReducer);
 
   const searchPlaces = propertiesData?.filter(
     item => item.place === route.params.place,
@@ -87,7 +89,7 @@ const PlacesScreen = () => {
   };
 
   const applyFilter = filter => {
-     modalDispatchers.toggleModal()
+    controlsDispatchers.toggleModal();
     switch (filter) {
       case 'cost:High to Low': {
         searchPlaces.map(val => val.properties.sort(compareHTL));
@@ -120,10 +122,15 @@ const PlacesScreen = () => {
     });
   }, []);
 
+  const {controlsState, controlsDispatchers} = useControls(controlsReducer);
+
   return (
     <SafeAreaView>
       <View>
-        <PropertyControl modalDispatchers={modalDispatchers} />
+        <PropertyControl controlsDispatchers={controlsDispatchers}
+            navigateToMap={() => navigation.navigate("Map", {
+                searchResults: searchPlaces
+            })}/>
         <ScrollView>
           {sortedData
             ?.filter(item => item.place === route.params.place)[0]
@@ -141,8 +148,8 @@ const PlacesScreen = () => {
         </ScrollView>
       </View>
       <SortFilterModal
-        modalState={modalState}
-        modalDispatchers={modalDispatchers}
+        controlsState={controlsState}
+        controlsDispatchers={controlsDispatchers}
         applyFilter={applyFilter}
       />
     </SafeAreaView>

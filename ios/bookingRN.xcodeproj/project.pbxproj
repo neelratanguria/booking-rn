@@ -13,13 +13,13 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		2D91EFED55794BA5975930CC /* Material-Design-Iconic-Font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1A6296595C4C47458E857851 /* Material-Design-Iconic-Font.ttf */; };
 		58BF5CF3A66B474FB72A438C /* Entypo.otf in Resources */ = {isa = PBXBuildFile; fileRef = 462C67857335423CA2C351F2 /* Entypo.otf */; };
 		62B4190FBE564A51AC233E70 /* ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E81DF70C7A7645F6AD2E49BC /* ionicons.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-bookingRN-bookingRNTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-bookingRN-bookingRNTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		8F64BDB19AC04ADAA5F0E640 /* anticon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73993D9B8DC349A2A06BC755 /* anticon.ttf */; };
 		984A53B5F0274C8A91043A44 /* MaterialIcons-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E85B3749F4F73A6B08FC2 /* MaterialIcons-Regular.ttf */; };
-		2D91EFED55794BA5975930CC /* Material-Design-Iconic-Font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1A6296595C4C47458E857851 /* Material-Design-Iconic-Font.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +43,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = bookingRN/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = bookingRN/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-bookingRN-bookingRNTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bookingRN-bookingRNTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A6296595C4C47458E857851 /* Material-Design-Iconic-Font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Material-Design-Iconic-Font.ttf"; path = "../assets/fonts/Material-Design-Iconic-Font.ttf"; sourceTree = "<group>"; };
 		24E342E9683642FC902E2DD9 /* Simple-Line-Icons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Simple-Line-Icons.ttf"; path = "../assets/fonts/Simple-Line-Icons.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-bookingRN.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bookingRN.debug.xcconfig"; path = "Target Support Files/Pods-bookingRN/Pods-bookingRN.debug.xcconfig"; sourceTree = "<group>"; };
 		462C67857335423CA2C351F2 /* Entypo.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.otf; path = ../assets/fonts/Entypo.otf; sourceTree = "<group>"; };
@@ -55,7 +56,6 @@
 		89C6BE57DB24E9ADA2F236DE /* Pods-bookingRN-bookingRNTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bookingRN-bookingRNTests.release.xcconfig"; path = "Target Support Files/Pods-bookingRN-bookingRNTests/Pods-bookingRN-bookingRNTests.release.xcconfig"; sourceTree = "<group>"; };
 		E81DF70C7A7645F6AD2E49BC /* ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = ionicons.ttf; path = ../assets/fonts/ionicons.ttf; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		1A6296595C4C47458E857851 /* Material-Design-Iconic-Font.ttf */ = {isa = PBXFileReference; name = "Material-Design-Iconic-Font.ttf"; path = "../assets/fonts/Material-Design-Iconic-Font.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

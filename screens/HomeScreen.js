@@ -30,7 +30,6 @@ const actionTypes = {
 };
 
 const controlsReducer = (state, action) => {
-  console.log(action);
   switch (action.type) {
     case actionTypes.increaseRoom: {
       console.log('increasing');
@@ -109,11 +108,14 @@ const useControls = reducer => {
 
 const HomeScreen = () => {
   const navigation = useNavigation();
-  const [selectedDates, setSelectedDates] = useState(null);
+  const init_date = {"endDate": "2023/05/05", "startDate": "2023/05/04"}
+  const [selectedDates, setSelectedDates] = useState(init_date);
   const [modalVisible, setModalVisible] = useState(false);
   const {state, dispatchers} = useControls(controlsReducer);
 
   const route = useRoute();
+
+  console.log(selectedDates)
 
   const searchPlaces = place => {
     if (!route.params || !selectedDates) {
