@@ -204,7 +204,7 @@ const HomeScreen = () => {
                   headerStyle: styles.datePickerHeader,
                   contentText: styles.placeholder,
                 }}
-                selectedBgColor={GLOBALS.COLOR.SECONDARY_BLUE}
+                selectedBgColor={GLOBALS.COLOR.COBALT_BLUE}
                 customButton={onConfirm => customButton(onConfirm)}
                 onConfirm={dates => setSelectedDates(dates)}
                 allowFontScaling={false} // optional

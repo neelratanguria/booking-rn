@@ -10,6 +10,7 @@ import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import globals from '../assets/globals';
+import { useNavigation } from '@react-navigation/native';
 
 const {width, height} = Dimensions.get('window');
 
@@ -21,9 +22,19 @@ const PropertyCard = ({
   selectedDates,
   availableRooms,
 }) => {
+  const navigation = useNavigation()
   return (
     <View>
-      <Pressable style={styles.cardContainer}>
+      <Pressable
+        onPress={() => navigation.navigate("Info",{
+          property: property,
+          adults: adults,
+          children: children,
+          rooms: rooms,
+          selectedDates: selectedDates
+        })}
+        style={styles.cardContainer}
+        >
         <View>
           <Image source={{uri: property.image}} style={styles.propertyImage} />
         </View>
@@ -100,7 +111,7 @@ const styles = StyleSheet.create({
     marginTop: 7,
   },
   geniusLevelContainer: {
-    backgroundColor: globals.COLOR.BLUE_LIGHT,
+    backgroundColor: globals.COLOR.ARGENTINIAN_BLUE,
     flexShrink: 1,
     padding: 3,
     borderRadius: 5,

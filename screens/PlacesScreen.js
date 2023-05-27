@@ -125,7 +125,7 @@ const PlacesScreen = () => {
   const {controlsState, controlsDispatchers} = useControls(controlsReducer);
 
   return (
-    <SafeAreaView>
+    <>
       <View>
         <PropertyControl controlsDispatchers={controlsDispatchers}
             navigateToMap={() => navigation.navigate("Map", {
@@ -152,7 +152,7 @@ const PlacesScreen = () => {
         controlsDispatchers={controlsDispatchers}
         applyFilter={applyFilter}
       />
-    </SafeAreaView>
+    </>
   );
 };
 
@@ -160,6 +160,6 @@ export default PlacesScreen;
 
 const styles = StyleSheet.create({
   propertyScroll: {
-    backgroundColor: globals.COLOR.WHITE_100,
+    backgroundColor: globals.COLOR.CULTURED,
   },
 });

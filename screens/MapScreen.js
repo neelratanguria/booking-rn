@@ -28,8 +28,8 @@ const MapScreen = () => {
             edgePadding: {
                 top: 80,
                 bottom: 80,
-                right: 80,
-                left: 80
+                right: 20,
+                left: 20
             }
         })
     }, 700)
@@ -37,7 +37,7 @@ const MapScreen = () => {
   
 
   return (
-    <SafeAreaView>
+    <>
       <MapView
         style={styles.map}
         ref={mapView}
@@ -58,7 +58,7 @@ const MapScreen = () => {
           )),
         )}
       </MapView>
-    </SafeAreaView>
+    </>
   );
 };
 
