@@ -8,26 +8,99 @@ import PropertyCard from '../components/PropertyCard';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import SortFilterModal from '../components/SortModal';
 
+const actionTypes = {
+  toggleModal: 'toggleModal',
+  setFilter: 'setFilter',
+};
+
+const modalControlsReducer = (state, action) => {
+  switch (action.type) {
+    case actionTypes.toggleModal: {
+      return {
+        ...state,
+        modalVisible: !state.modalVisible,
+      };
+    }
+    case actionTypes.setFilter: {
+      return {
+        ...state,
+        selectedFilter: action.payload,
+      };
+    }
+    default: {
+      throw new Error();
+    }
+  }
+};
+
+const useModalControls = reducer => {
+  const [modalState, dispatch] = React.useReducer(reducer, {
+    modalVisible: true,
+    selectedFilter: null,
+  });
+
+  const toggleModal = () =>
+    dispatch({type: actionTypes.toggleModal, payload: null});
+  const setFilter = filter =>
+    dispatch({type: actionTypes.setFilter, payload: filter});
+
+  const modalDispatchers = {
+    toggleModal,
+    setFilter,
+  };
+
+  return {
+    modalState,
+    modalDispatchers,
+  };
+};
+
 const PlacesScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
-  const [modalVisibile, setModalVisibile] = useState(true);
-  const [selectedFilter, setSelectedFilter] = useState(null)
 
-  const searchPlaces = propertiesData?.filter((item) => item.place === route.params.place)
+  const [sortedData, setSortedData] = useState(propertiesData);
 
-  const compare = () => {
-    
-  }
+  const {modalState, modalDispatchers} = useModalControls(modalControlsReducer);
 
-  const applyFilter = (filter) => {
-    setModalVisibile(false)
-    switch(filter) {
-        case 'cost:High to Low': {
-            searchPlaces.map((val) => val.properties.sort(compare))
-        }
+  const searchPlaces = propertiesData?.filter(
+    item => item.place === route.params.place,
+  );
+
+  const compareHTL = (a, b) => {
+    if (a.newPrice > b.newPrice) {
+      return -1;
     }
-  }
+    if (a.newPrice < b.newPrice) {
+      return 1;
+    }
+    return 0;
+  };
+  const compareLTH = (a, b) => {
+    if (a.newPrice > b.newPrice) {
+      return 1;
+    }
+    if (a.newPrice < b.newPrice) {
+      return -1;
+    }
+    return 0;
+  };
+
+  const applyFilter = filter => {
+     modalDispatchers.toggleModal()
+    switch (filter) {
+      case 'cost:High to Low': {
+        searchPlaces.map(val => val.properties.sort(compareHTL));
+        setSortedData(searchPlaces);
+        break;
+      }
+      case 'cost:Low to High': {
+        searchPlaces.map(val => val.properties.sort(compareLTH));
+        setSortedData(searchPlaces);
+        break;
+      }
+    }
+  };
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -50,10 +123,9 @@ const PlacesScreen = () => {
   return (
     <SafeAreaView>
       <View>
-        <PropertyControl />
+        <PropertyControl modalDispatchers={modalDispatchers} />
         <ScrollView>
-          {console.log()}
-          {propertiesData
+          {sortedData
             ?.filter(item => item.place === route.params.place)[0]
             ?.properties.map((property, index) => (
               <PropertyCard
@@ -69,10 +141,10 @@ const PlacesScreen = () => {
         </ScrollView>
       </View>
       <SortFilterModal
-        visible={modalVisibile}
-        setSelectedFilter={setSelectedFilter}
-        selectedFilter={selectedFilter}
-        applyFilter={applyFilter}/>
+        modalState={modalState}
+        modalDispatchers={modalDispatchers}
+        applyFilter={applyFilter}
+      />
     </SafeAreaView>
   );
 };

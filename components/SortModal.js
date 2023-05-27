@@ -13,9 +13,8 @@ import globals from '../assets/globals';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const SortFilterModal = ({
-  visible,
-  setSelectedFilter,
-  selectedFilter,
+  modalState,
+  modalDispatchers,
   applyFilter,
 }) => {
   const filters = [
@@ -33,13 +32,13 @@ const SortFilterModal = ({
     <>
       <BottomModal
         swipeThreshold={200}
-        onBackdropPress={() => setModalVisible(!modalVisible)}
+        onBackdropPress={() => modalDispatchers.toggleModal()}
         swipeDirection={['up', 'down']}
         footer={
           <ModalFooter>
             <Pressable
               style={styles.footer}
-              onPress={() => applyFilter(selectedFilter)}>
+              onPress={() => applyFilter(modalState.selectedFilter)}>
               <Text>Apply</Text>
             </Pressable>
           </ModalFooter>
@@ -50,9 +49,9 @@ const SortFilterModal = ({
             slideFrom: 'bottom',
           })
         }
-        onHardwareBackPress={() => setModalVisible(!modalVisible)}
-        onTouchOutside={() => setModalVisible(!modalVisible)}
-        visible={visible}>
+        onHardwareBackPress={() => modalDispatchers.toggleModal()}
+        onTouchOutside={() => modalDispatchers.toggleModal()}
+        visible={modalState.modalVisible}>
         <ModalContent styles={styles.content}>
           <View style={styles.container}>
             <View style={styles.controlType}>
@@ -64,8 +63,8 @@ const SortFilterModal = ({
                 <Pressable
                   key={index}
                   style={styles.option}
-                  onPress={() => setSelectedFilter(item.filter)}>
-                  {item.filter.includes(selectedFilter) ? (
+                  onPress={() => modalDispatchers.setFilter(item.filter)}>
+                  {item.filter.includes(modalState.selectedFilter) ? (
                     <MaterialIcons
                       name="check-circle"
                       size={18}
@@ -94,12 +93,12 @@ export default SortFilterModal;
 
 const styles = StyleSheet.create({
   footer: {
-    paddingRight: 10,
+    width: "100%",
+    paddingVertical: 20,
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginVertical: 10,
-    marginBottom: 15,
-    alignItems: 'center',
+    marginVertical: 5,
+    alignItems: 'center'
   },
   content: {
     width: '100%',

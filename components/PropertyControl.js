@@ -4,10 +4,12 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 
-const PropertyControl = () => {
+const PropertyControl = ({modalDispatchers}) => {
   return (
     <Pressable style={styles.controlsContainer}>
-      <TouchableOpacity style={styles.controlContainer}>
+      <TouchableOpacity 
+        style={styles.controlContainer}
+        onPress={() => modalDispatchers.toggleModal()}>
         <MaterialIcons name="sort" size={22} color="gray" />
         <Text style={styles.controlText}>Sort</Text>
       </TouchableOpacity>

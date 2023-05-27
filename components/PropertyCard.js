@@ -21,7 +21,6 @@ const PropertyCard = ({
   selectedDates,
   availableRooms,
 }) => {
-  console.log(`Adults: ${adults}`);
   return (
     <View>
       <Pressable style={styles.cardContainer}>
