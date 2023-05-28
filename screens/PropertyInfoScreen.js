@@ -298,7 +298,8 @@ const styles = StyleSheet.create({
     color: globals.COLOR.CULTURED,
   },
   callToActionContainer: {
-    margin: 10
+    margin: 10,
+    marginBottom: 50
   },
   callToActionButton: {
     backgroundColor: globals.COLOR.PRIMARY_BLUE,
