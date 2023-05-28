@@ -10,5 +10,8 @@ export default {
         GLAUCOUS: '#6082B6',
         CARLSBERG_GREEN: '#17B169',
         AZURE: '#007FFF'
+    },
+    CONFIG: {
+        IS_TESTING: true
     }
 }

@@ -21,8 +21,6 @@ const PropertyInfoScreen = () => {
   const dates = route.params.selectedDates;
   const {rooms, children, adults, property} = route.params;
 
-  console.log(property);
-
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShow: true,
@@ -33,7 +31,7 @@ const PropertyInfoScreen = () => {
         color: 'white',
       },
       headerStyle: {
-        backgroundColor: '#003580',
+        backgroundColor: globals.COLOR.PRIMARY_BLUE,
         height: 110,
         borderBottomColor: 'transparent',
         shadowColor: 'transparent',

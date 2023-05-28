@@ -1,5 +1,5 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
-import React, {useLayoutEffect, useState} from 'react';
+import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {
   Button,
   Pressable,
@@ -108,14 +108,25 @@ const useControls = reducer => {
 
 const HomeScreen = () => {
   const navigation = useNavigation();
-  const init_date = {"endDate": "2023/05/05", "startDate": "2023/05/04"}
+  const init_date = {endDate: '2023/05/05', startDate: '2023/05/04'};
   const [selectedDates, setSelectedDates] = useState(init_date);
   const [modalVisible, setModalVisible] = useState(false);
   const {state, dispatchers} = useControls(controlsReducer);
 
+  const searchButtonClickHandle = () => {
+    searchPlaces(route?.params?.input);
+    
+  };
+
+  useEffect(() => {
+    if(GLOBALS.CONFIG.IS_TESTING) {
+      setTimeout(searchButtonClickHandle, 2000);
+    }
+  }, []);
+
   const route = useRoute();
 
-  console.log(selectedDates)
+  console.log(selectedDates);
 
   const searchPlaces = place => {
     if (!route.params || !selectedDates) {
@@ -233,9 +244,8 @@ const HomeScreen = () => {
                 ...styles.inputBox,
                 ...styles.inputSearch,
               }}
-              onPress={() => {
-                searchPlaces(route?.params?.input);
-              }}>
+              mProp={() => {}}
+              onPress={searchButtonClickHandle}>
               <Text style={styles.searchButtonText}>Search</Text>
             </TouchableOpacity>
           </View>

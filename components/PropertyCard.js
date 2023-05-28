@@ -6,7 +6,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import globals from '../assets/globals';
@@ -21,18 +21,33 @@ const PropertyCard = ({
   property,
   selectedDates,
   availableRooms,
+  index
 }) => {
   const navigation = useNavigation()
+
+  const navigateToPropertyInfo = () => {
+    navigation.navigate("Info",{
+      property: property,
+      adults: adults,
+      children: children,
+      rooms: rooms,
+      selectedDates: selectedDates
+    })
+  }
+
+
+
+  useEffect(() => {
+    if(globals.CONFIG.IS_TESTING && index === 0) {
+      setTimeout(navigateToPropertyInfo, 2000)
+    }
+  }, [])
+  
+
   return (
     <View>
       <Pressable
-        onPress={() => navigation.navigate("Info",{
-          property: property,
-          adults: adults,
-          children: children,
-          rooms: rooms,
-          selectedDates: selectedDates
-        })}
+        onPress={navigateToPropertyInfo}
         style={styles.cardContainer}
         >
         <View>

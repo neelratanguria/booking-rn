@@ -137,6 +137,7 @@ const PlacesScreen = () => {
             ?.properties.map((property, index) => (
               <PropertyCard
                 key={index}
+                index={index}
                 property={property}
                 rooms={route.params?.counts?.countRoom}
                 children={route.params?.counts?.countChildren}
