@@ -8,6 +8,7 @@ export default {
         CULTURED: "#F5F5F5",
         ARGENTINIAN_BLUE: '#6CB4EE',
         GLAUCOUS: '#6082B6',
-        CARLSBERG_GREEN: '#17B169'
+        CARLSBERG_GREEN: '#17B169',
+        AZURE: '#007FFF'
     }
 }
