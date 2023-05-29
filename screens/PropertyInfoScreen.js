@@ -4,9 +4,11 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  Touchable,
+  TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useLayoutEffect} from 'react';
+import React, {useEffect, useLayoutEffect} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {pixelNormalize} from '../utils/normalise';
@@ -16,7 +18,8 @@ const PropertyInfoScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
   const photos = route.params.property.photos;
-  const {adults, property} = route.params;
+  const dates = route.params.selectedDates;
+  const {rooms, children, adults, property} = route.params;
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -28,7 +31,7 @@ const PropertyInfoScreen = () => {
         color: 'white',
       },
       headerStyle: {
-        backgroundColor: '#003580',
+        backgroundColor: globals.COLOR.PRIMARY_BLUE,
         height: 110,
         borderBottomColor: 'transparent',
         shadowColor: 'transparent',
@@ -36,12 +39,29 @@ const PropertyInfoScreen = () => {
     });
   }, []);
 
+  const navigateToRooms = () => {
+    navigation.navigate('Rooms', {
+      property: property,
+      adults: adults,
+      children: children,
+      rooms: rooms,
+      selectedDates: dates,
+    });
+  }
+
+  useEffect(() => {
+    if(globals.CONFIG.IS_TESTING) {
+      setTimeout(navigateToRooms, 
+        globals.CONFIG.AUTO_SCREEN_CHANGE_DELAY)
+    }
+  }, [])
+
   return (
     <View>
       <ScrollView>
         <Pressable style={styles.imageContainer}>
-          {photos.slice(0, 5).map(photo => (
-            <View>
+          {photos.slice(0, 5).map((photo, index) => (
+            <View key={index}>
               <Image source={{uri: photo.image}} style={styles.image} />
             </View>
           ))}
@@ -62,11 +82,11 @@ const PropertyInfoScreen = () => {
             </View>
           </View>
 
-          <View style={{
-            ...styles.tagContainer,
-            flex: 1,
-            
-          }}>
+          <View
+            style={{
+              ...styles.tagContainer,
+              flex: 1,
+            }}>
             <Text style={styles.tagText}>Travel Sustainable</Text>
           </View>
         </View>
@@ -85,7 +105,12 @@ const PropertyInfoScreen = () => {
         {property.oldPrice !== property.newPrice ? (
           <View style={{flexDirection: 'row'}}>
             <View style={styles.discountContainer}>
-            <Text style={styles.discountText}>{Math.round(100 - (property.newPrice / property.oldPrice*100))}% Off</Text>
+              <Text style={styles.discountText}>
+                {Math.round(
+                  100 - (property.newPrice / property.oldPrice) * 100,
+                )}
+                % Off
+              </Text>
             </View>
           </View>
         ) : (
@@ -93,6 +118,60 @@ const PropertyInfoScreen = () => {
         )}
 
         <View style={styles.border} />
+
+        <View style={styles.datesContainer}>
+          <View>
+            <Text style={styles.titles}>Check-In</Text>
+            <Text style={styles.infoText}>{dates.startDate}</Text>
+          </View>
+          <View>
+            <Text style={styles.titles}>Check-Out</Text>
+            <Text style={styles.infoText}>{dates.endDate}</Text>
+          </View>
+        </View>
+        <View style={styles.countsContainer}>
+          <Text style={styles.titles}>Rooms and guests</Text>
+          <Text style={styles.infoText}>
+            {rooms}
+            {rooms > 1 ? ' rooms ' : ' room '}
+            {adults}
+            {adults > 1 ? ' adults ' : ' adult '}
+            {children}
+            {children > 1 ? ' children ' : ' child '}
+          </Text>
+        </View>
+
+        <View style={styles.border} />
+
+        <View style={styles.amenitiesSectionContainer}>
+          <Text style={styles.titles}>Most Popular Facilities</Text>
+          <View style={styles.amenitiesContainer}>
+            {[
+              'Couple Friendly',
+              'Dog Friendly',
+              'Free WiFi',
+              'Swimming Pool',
+              'Free Parking',
+              'Spa',
+              'Fitness Center',
+              'Free Parking',
+            ].map((amenity, index) => (
+              <View style={styles.amenity} key={index}>
+                <Text style={styles.amenityText}>{amenity}</Text>
+              </View>
+            ))}
+          </View>
+        </View>
+
+        <View style={styles.border} />
+
+        <View style={styles.callToActionContainer}>
+          <TouchableOpacity
+            style={styles.callToActionButton}
+            onPress={navigateToRooms}>
+            <Text style={styles.callToActionText}>Select Availabilty</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </View>
   );
@@ -154,7 +233,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 3,
     borderRadius: 8,
-    marginLeft: 10
+    marginLeft: 10,
   },
   tagText: {
     color: 'white',
@@ -192,12 +271,61 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: globals.COLOR.CARLSBERG_GREEN,
     marginHorizontal: 10,
-    marginVertical: 10
+    marginVertical: 10,
   },
   discountText: {
     textAlign: 'center',
     color: 'white',
     fontSize: 15,
-    fontWeight: 'bold'
-  }
+    fontWeight: 'bold',
+  },
+  datesContainer: {
+    flexDirection: 'row',
+    gap: 60,
+    margin: 10,
+  },
+  titles: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 5,
+  },
+  infoText: {
+    color: globals.COLOR.AZURE,
+    fontWeight: 'bold',
+  },
+  countsContainer: {
+    margin: 10,
+  },
+  amenitiesSectionContainer: {
+    margin: 10,
+  },
+  amenitiesContainer: {
+    flexDirection: 'row',
+    gap: 15,
+    flexWrap: 'wrap',
+  },
+  amenity: {
+    backgroundColor: globals.COLOR.AZURE,
+    paddingHorizontal: 10,
+    paddingVertical: 3,
+    borderRadius: 5,
+  },
+  amenityText: {
+    color: globals.COLOR.CULTURED,
+  },
+  callToActionContainer: {
+    margin: 10,
+    marginBottom: 50,
+  },
+  callToActionButton: {
+    backgroundColor: globals.COLOR.PRIMARY_BLUE,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  callToActionText: {
+    color: 'white',
+    fontSize: 15,
+    fontWeight: 'bold',
+  },
 });
