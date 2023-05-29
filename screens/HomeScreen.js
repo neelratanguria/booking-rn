@@ -120,7 +120,8 @@ const HomeScreen = () => {
 
   useEffect(() => {
     if(GLOBALS.CONFIG.IS_TESTING) {
-      setTimeout(searchButtonClickHandle, 2000);
+      setTimeout(searchButtonClickHandle, 
+        GLOBALS.CONFIG.AUTO_SCREEN_CHANGE_DELAY);
     }
   }, []);
 

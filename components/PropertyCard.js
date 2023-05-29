@@ -39,7 +39,8 @@ const PropertyCard = ({
 
   useEffect(() => {
     if(globals.CONFIG.IS_TESTING && index === 0) {
-      setTimeout(navigateToPropertyInfo, 2000)
+      setTimeout(navigateToPropertyInfo, 
+        globals.CONFIG.AUTO_SCREEN_CHANGE_DELAY)
     }
   }, [])
   

@@ -12,6 +12,7 @@ export default {
         AZURE: '#007FFF'
     },
     CONFIG: {
-        IS_TESTING: true
+        IS_TESTING: true,
+        AUTO_SCREEN_CHANGE_DELAY: 1000
     }
 }

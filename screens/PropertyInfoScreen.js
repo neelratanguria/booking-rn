@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useLayoutEffect} from 'react';
+import React, {useEffect, useLayoutEffect} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {pixelNormalize} from '../utils/normalise';
@@ -38,6 +38,23 @@ const PropertyInfoScreen = () => {
       },
     });
   }, []);
+
+  const navigateToRooms = () => {
+    navigation.navigate('Rooms', {
+      property: property,
+      adults: adults,
+      children: children,
+      rooms: rooms,
+      selectedDates: dates,
+    });
+  }
+
+  useEffect(() => {
+    if(globals.CONFIG.IS_TESTING) {
+      setTimeout(navigateToRooms, 
+        globals.CONFIG.AUTO_SCREEN_CHANGE_DELAY)
+    }
+  }, [])
 
   return (
     <View>
@@ -151,15 +168,7 @@ const PropertyInfoScreen = () => {
         <View style={styles.callToActionContainer}>
           <TouchableOpacity
             style={styles.callToActionButton}
-            onPress={() => {
-              navigation.navigate('Rooms', {
-                property: property,
-                adults: adults,
-                children: children,
-                rooms: rooms,
-                selectedDates: dates,
-              });
-            }}>
+            onPress={navigateToRooms}>
             <Text style={styles.callToActionText}>Select Availabilty</Text>
           </TouchableOpacity>
         </View>
