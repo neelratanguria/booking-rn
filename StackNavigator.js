@@ -15,6 +15,7 @@ import SearchScreen from './screens/SearchScreen'
 import PlacesScreen from './screens/PlacesScreen'
 import MapScreen from './screens/MapScreen'
 import PropertyInfoScreen from './screens/PropertyInfoScreen'
+import RoomsScreen from './screens/RoomsScreen'
 
 
 const StackNavigator = () => {
@@ -84,6 +85,8 @@ const StackNavigator = () => {
                 <Stack.Screen name='Places' component={PlacesScreen} />
                 <Stack.Screen name='Map' component={MapScreen} options={{ headerShown: true }}/>
                 <Stack.Screen name='Info' component={PropertyInfoScreen} options={{ headerShown: true }}/>
+                <Stack.Screen name='Rooms' component={RoomsScreen} options={{ headerShown: true }}/>
+                
             </Stack.Navigator>
         </NavigationContainer>
     )

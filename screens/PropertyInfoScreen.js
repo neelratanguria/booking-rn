@@ -149,11 +149,20 @@ const PropertyInfoScreen = () => {
         <View style={styles.border} />
 
         <View style={styles.callToActionContainer}>
-          <TouchableOpacity style={styles.callToActionButton}>
+          <TouchableOpacity
+            style={styles.callToActionButton}
+            onPress={() => {
+              navigation.navigate('Rooms', {
+                property: property,
+                adults: adults,
+                children: children,
+                rooms: rooms,
+                selectedDates: dates,
+              });
+            }}>
             <Text style={styles.callToActionText}>Select Availabilty</Text>
           </TouchableOpacity>
         </View>
-
       </ScrollView>
     </View>
   );
@@ -297,17 +306,17 @@ const styles = StyleSheet.create({
   },
   callToActionContainer: {
     margin: 10,
-    marginBottom: 50
+    marginBottom: 50,
   },
   callToActionButton: {
     backgroundColor: globals.COLOR.PRIMARY_BLUE,
     height: 50,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   callToActionText: {
     color: 'white',
     fontSize: 15,
-    fontWeight: 'bold'
-  }
+    fontWeight: 'bold',
+  },
 });
