@@ -1,12 +1,14 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useLayoutEffect } from 'react'
-import { useNavigation, useRoute } from '@react-navigation/native'
-import globals from '../assets/globals'
+import {Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
+import React, {useLayoutEffect} from 'react';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import globals from '../assets/globals';
 
 const RoomsScreen = () => {
-  const navigation = useNavigation()
-  const route = useRoute()
-  const { property } = route.params
+  const navigation = useNavigation();
+  const route = useRoute();
+  const {property} = route.params;
+
+  console.log(property.rooms);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -27,12 +29,18 @@ const RoomsScreen = () => {
   }, []);
 
   return (
-    <View>
-      <Text>RoomsScreen</Text>
-    </View>
-  )
-}
+    <ScrollView>
+      {property.rooms.map((item, index) => (
+        <Pressable key={index}>
+          <View>
+            <Text>{item.name}</Text>
+          </View>
+        </Pressable>
+      ))}
+    </ScrollView>
+  );
+};
 
-export default RoomsScreen
+export default RoomsScreen;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
