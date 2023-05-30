@@ -13,6 +13,7 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {pixelNormalize} from '../utils/normalise';
 import globals from '../assets/globals';
+import Amenities from '../components/Amenities';
 
 const PropertyInfoScreen = () => {
   const route = useRoute();
@@ -143,25 +144,7 @@ const PropertyInfoScreen = () => {
 
         <View style={styles.border} />
 
-        <View style={styles.amenitiesSectionContainer}>
-          <Text style={styles.titles}>Most Popular Facilities</Text>
-          <View style={styles.amenitiesContainer}>
-            {[
-              'Couple Friendly',
-              'Dog Friendly',
-              'Free WiFi',
-              'Swimming Pool',
-              'Free Parking',
-              'Spa',
-              'Fitness Center',
-              'Free Parking',
-            ].map((amenity, index) => (
-              <View style={styles.amenity} key={index}>
-                <Text style={styles.amenityText}>{amenity}</Text>
-              </View>
-            ))}
-          </View>
-        </View>
+        <Amenities />
 
         <View style={styles.border} />
 
