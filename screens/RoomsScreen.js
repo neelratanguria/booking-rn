@@ -10,15 +10,36 @@ import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import globals from '../assets/globals';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Entypo from 'react-native-vector-icons/Entypo';
 import Amenities from '../components/Amenities';
 
 const RoomsScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
-  const {property} = route.params;
+  const {property, adults, children, rooms, selectedDates} = route.params;
 
   const [selected, setSelected] = useState(null);
+
+  useEffect(() => {
+    if(globals.CONFIG.IS_TESTING) {
+      setTimeout(() => {
+        setSelected(property.rooms[0].name)
+      }, 
+        globals.CONFIG.AUTO_SCREEN_CHANGE_DELAY)
+      setTimeout(navigateToUserScreen, 
+        globals.CONFIG.AUTO_SCREEN_CHANGE_DELAY+1000)
+    }
+  }, [])
+
+  const navigateToUserScreen = () => {
+    navigation.navigate('User', {
+      property: property,
+      adults: adults,
+      children: children,
+      rooms: rooms,
+      selectedDates: selectedDates,
+    });
+  }
+  
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -85,7 +106,7 @@ const RoomsScreen = () => {
       </ScrollView>
       {selected && (
         <TouchableOpacity
-          onPress={() => {}}
+          onPress={navigateToUserScreen}
           style={{
             ...styles.actionButton,
             backgroundColor: globals.COLOR.AZURE,

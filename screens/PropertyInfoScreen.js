@@ -19,7 +19,7 @@ const PropertyInfoScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
   const photos = route.params.property.photos;
-  const dates = route.params.selectedDates;
+  const selectedDates = route.params.selectedDates;
   const {rooms, children, adults, property} = route.params;
 
   useLayoutEffect(() => {
@@ -46,7 +46,7 @@ const PropertyInfoScreen = () => {
       adults: adults,
       children: children,
       rooms: rooms,
-      selectedDates: dates,
+      selectedDates: selectedDates,
     });
   }
 
@@ -123,11 +123,11 @@ const PropertyInfoScreen = () => {
         <View style={styles.datesContainer}>
           <View>
             <Text style={styles.titles}>Check-In</Text>
-            <Text style={styles.infoText}>{dates.startDate}</Text>
+            <Text style={styles.infoText}>{selectedDates.startDate}</Text>
           </View>
           <View>
             <Text style={styles.titles}>Check-Out</Text>
-            <Text style={styles.infoText}>{dates.endDate}</Text>
+            <Text style={styles.infoText}>{selectedDates.endDate}</Text>
           </View>
         </View>
         <View style={styles.countsContainer}>
