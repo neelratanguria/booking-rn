@@ -88,9 +88,21 @@ const UserScreen = () => {
 
   const {state, dispatchers} = useUserForm(formReducer);
 
+  const navigateToConfirmationScreen = () => {
+    navigation.navigate('Confirmation');
+  };
+
   useEffect(() => {
-    console.log(state);
-  }, [state]);
+    if (globals.CONFIG.IS_TESTING) {
+      setTimeout(() => {
+        dispatchers.setFirstName("Neel")
+        dispatchers.setLastName("Guria")
+        dispatchers.setEmail("neelratan@gmail.com")
+        dispatchers.setPhoneNumber("9876543210")
+      }, globals.CONFIG.AUTO_SCREEN_CHANGE_DELAY);
+      setTimeout(navigateToConfirmationScreen, globals.CONFIG.AUTO_SCREEN_CHANGE_DELAY+1000);
+    }
+  }, []);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -153,7 +165,7 @@ const UserScreen = () => {
           </View>
           <Text>You saved {property.oldPrice - property.newPrice} rupees</Text>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={navigateToConfirmationScreen}>
           <Text style={styles.callToAction}>Final Step</Text>
         </TouchableOpacity>
       </Pressable>
@@ -207,6 +219,6 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     backgroundColor: globals.COLOR.COBALT_BLUE,
     color: 'white',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
 });
