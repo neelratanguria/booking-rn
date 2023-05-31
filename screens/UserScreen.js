@@ -1,4 +1,12 @@
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  Touchable,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useEffect, useLayoutEffect} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import globals from '../assets/globals';
@@ -81,9 +89,8 @@ const UserScreen = () => {
   const {state, dispatchers} = useUserForm(formReducer);
 
   useEffect(() => {
-    console.log(state)
-  }, [state])
-  
+    console.log(state);
+  }, [state]);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -118,22 +125,38 @@ const UserScreen = () => {
         <TextInput
           value={state.lastName}
           onChangeText={text => dispatchers.setLastName(text)}
-          style={styles.textInput} />
+          style={styles.textInput}
+        />
       </View>
       <View style={styles.inputContainer}>
         <Text>Email</Text>
         <TextInput
           value={state.email}
           onChangeText={text => dispatchers.setEmail(text)}
-          style={styles.textInput} />
+          style={styles.textInput}
+        />
       </View>
       <View style={styles.inputContainer}>
         <Text>Phone Number</Text>
         <TextInput
           value={state.phoneNumber}
           onChangeText={text => dispatchers.setPhoneNumber(text)}
-          style={styles.textInput} />
+          style={styles.textInput}
+        />
       </View>
+
+      <Pressable style={styles.bottomContainer}>
+        <View>
+          <View style={styles.priceContainer}>
+            <Text style={styles.oldPrice}>Rs {property.oldPrice}</Text>
+            <Text style={styles.newPrice}>Rs {property.newPrice}</Text>
+          </View>
+          <Text>You saved {property.oldPrice - property.newPrice} rupees</Text>
+        </View>
+        <TouchableOpacity>
+          <Text style={styles.callToAction}>Final Step</Text>
+        </TouchableOpacity>
+      </Pressable>
     </View>
   );
 };
@@ -142,9 +165,10 @@ export default UserScreen;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    height: '100%',
   },
   inputContainer: {
+    margin: 20,
     flexDirection: 'column',
     gap: 10,
     marginVertical: 10,
@@ -153,5 +177,36 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 1,
     padding: 10,
+  },
+  bottomContainer: {
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+    paddingTop: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 'auto',
+    backgroundColor: 'white',
+  },
+  priceContainer: {
+    flexDirection: 'row',
+    gap: 10,
+    marginVertical: 4,
+    alignItems: 'center',
+  },
+  oldPrice: {
+    fontSize: 18,
+    color: 'red',
+    textDecorationLine: 'line-through',
+  },
+  newPrice: {
+    fontSize: 18,
+  },
+  callToAction: {
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    backgroundColor: globals.COLOR.COBALT_BLUE,
+    color: 'white',
+    fontWeight: 'bold'
   },
 });
