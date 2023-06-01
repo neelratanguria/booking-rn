@@ -84,12 +84,18 @@ const useUserForm = reducer => {
 const UserScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
-  const {property} = route.params;
+  const {property, adults, children, rooms, selectedDates} = route.params;
 
   const {state, dispatchers} = useUserForm(formReducer);
 
   const navigateToConfirmationScreen = () => {
-    navigation.navigate('Confirmation');
+    navigation.navigate('Confirmation', {
+      property: property,
+      adults: adults,
+      children: children,
+      rooms: rooms,
+      selectedDates: selectedDates,
+    });
   };
 
   useEffect(() => {
