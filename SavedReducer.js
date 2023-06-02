@@ -2,12 +2,12 @@ import {createSlice} from '@reduxjs/toolkit';
 
 export const SavedSlice = createSlice({
   name: 'booking',
-  initialBooking: {
-    bookings: [],
+  initialState: {
+    booking: [],
   },
   reducers: {
     savedPlaces: (state, action) => {
-      state.bookings.push({...action.payload});
+      state.booking.push({...action.payload});
     },
   },
 });
