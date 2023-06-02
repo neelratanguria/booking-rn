@@ -16,22 +16,23 @@ import {
   View,
 } from 'react-native';
 import StackNavigator from './StackNavigator';
-import { ModalPortal } from 'react-native-modals';
+import {ModalPortal} from 'react-native-modals';
+import {Provider} from 'react-redux';
+import store from './store';
 
 function App() {
-  
   return (
-    <>
-      <StackNavigator/>
+    <Provider store={store}>
+      <StackNavigator />
       <ModalPortal />
-    </>
+    </Provider>
   );
 }
 
 const styles = StyleSheet.create({
   sectionContainer: {
-    flex: 1
-  }
+    flex: 1,
+  },
 });
 
 export default App;
