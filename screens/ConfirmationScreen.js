@@ -3,6 +3,8 @@ import React, {useLayoutEffect} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import globals from '../assets/globals';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { useDispatch } from 'react-redux';
+import { savedPlaces } from '../SavedReducer';
 
 const ConfirmationScreen = () => {
   const navigation = useNavigation();
@@ -26,6 +28,13 @@ const ConfirmationScreen = () => {
       },
     });
   }, []);
+
+  const dispatch = useDispatch()
+
+  const confirmBooking = () => {
+    dispatch(savedPlaces(route.params))
+    navigation.replace("Main")
+  }
 
   return (
     <View style={styles.container}>
@@ -74,7 +83,7 @@ const ConfirmationScreen = () => {
 
       <TouchableOpacity
         style={styles.callToActionButton}
-        onPress={() => {}}>
+        onPress={confirmBooking}>
         <Text style={styles.callToActionText}>Book Now</Text>
       </TouchableOpacity>
     </View>
